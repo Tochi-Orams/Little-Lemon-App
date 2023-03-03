@@ -1,38 +1,79 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* General Styling */
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
 }
+a:link {text-decoration: none; color: black;}
+a:visited {text-decoration: none; color: black;}
+a:hover {text-decoration: none;} 
+a:active {text-decoration: none; color: black}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Navingation Styling */
+.navbar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 4px gray;
+  height: 5rem;
+  position: sticky;
+  z-index: 1;
+  top: 0px;
+  padding: 0 12.5vw 0 12.5vw;
+}
+.navlink {
+  text-transform: uppercase;
+  color: #000000;
+  position: relative;
+  white-space: nowrap;
+  padding-right: 5vw;
+  margin: auto;
+}
+.menu {
+  display: flex;
+  list-style: none;
+  margin: auto 0 auto auto;
+}
+.Logo {
+  margin: auto 0 auto 0;
+}
+.login {
+  padding-left: 10vw;
+  margin: auto;
 }
 
-.App-link {
-  color: #61dafb;
+/* Footer styling */
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(255, 255, 255);
+  height: 5rem;
+  padding: 0 20vw 0 20vw;
+  margin: auto;
+}
+.fLogo img {
+  width: 120px;
+}
+.fCol {
+  margin-left: auto;
+}
+.listTitle {
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  list-style: none;
+}
+.fItem {
+  padding-left: 0.5rem;
+  list-style: none;
+}
+.fLink {
+  color: #000000;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Section Styling */
+article {
+  padding: 0 12.5vw 0 12.5vw;
 }
