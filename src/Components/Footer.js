@@ -1,10 +1,12 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram, faFacebook, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import logo2 from "../Assets/Logo 2.png"
 
-function Footer() {
+const Footer = () => {
     return (
         <footer>
             <div className="fLogo">
-                <a href="https://youtube.com/">
+                <a href="/">
                     <img src={logo2} alt="Logo 2" />
                 </a>
             </div>
@@ -14,19 +16,19 @@ function Footer() {
                         Navigation
                     </li>
                     <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">About</a>
+                        <a className="fLink" href="/">About</a>
                     </li>
                     <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Menu</a>
+                        <a className="fLink" href="/">Menu</a>
                     </li>
                     <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Reservations</a>
+                        <a className="fLink" href="/">Reservations</a>
                     </li>
                     <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Order Online</a>
+                        <a className="fLink" href="/">Order Online</a>
                     </li>
                     <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Login</a>
+                        <a className="fLink" href="/">Login</a>
                     </li>
                 </ul>
             </div>
@@ -36,13 +38,13 @@ function Footer() {
                         Contact
                     </li>
                     <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Email</a>
+                        <a className="fLink" href="mailto: hello@example.com">Email</a>
                     </li>
                     <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Phone Number</a>
+                        <a className="fLink" href="/">Phone Number</a>
                     </li>
                     <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Address</a>
+                        <a className="fLink" href="/">Address</a>
                     </li>
                 </ul>
             </div>
@@ -51,15 +53,23 @@ function Footer() {
                     <li className="listTitle">
                         Socials
                     </li>
-                    <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Instagram</a>
-                    </li>
-                    <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Facebook</a>
-                    </li>
-                    <li className="fItem">
-                        <a className="fLink" href="https://youtube.com/">Tik Tok</a>
-                    </li>
+                    <div className="socials">
+                        <li className="fItem">
+                            <a className="fLink" href="https://instagram.com/">
+                                <FontAwesomeIcon icon={faInstagram} size="2x" color="#b9b9b9"/>
+                            </a>
+                        </li>
+                        <li className="fItem">
+                            <a className="fLink" href="https://facebook.com/">
+                                <FontAwesomeIcon icon={faFacebook} size="2x" color="#b9b9b9"/>
+                            </a>
+                        </li>
+                        <li className="fItem">
+                            <a className="fLink" href="https://tiktok.com/">
+                                <FontAwesomeIcon icon={faTiktok} size="2x" color="#b9b9b9"/>
+                            </a>
+                        </li>
+                    </div>
                 </ul>
             </div>
         </footer>
