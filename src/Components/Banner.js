@@ -1,11 +1,11 @@
-const Banner = (image, title, subtitle) => {
+const Banner = ({image, title, subtitle, CN}) => {
     return (
-        <div className="banner"
-          style={{background: `url('${image}') no-repeat`}}
+        <article className={CN}
+          style={{background: `url('${image}') no-repeat 0% 70%`}}
         >
             <h1>{title}</h1>
-            <h2>{subtitle}</h2>
-        </div>
+            <h3>{subtitle}</h3>
+        </article>
     )
 }
 

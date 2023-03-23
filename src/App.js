@@ -1,10 +1,13 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Routes, Route } from 'react-router-dom';
+import Home from "./Components/Home.js"
+import Reserve from "./Components/Reserve.js";
 import Nav from "./Components/Nav.js";
-import Main from "./Components/Main.js";
 import Footer from "./Components/Footer.js";
-import MobileNav from './Components/MobileNav';
-import MobileFooter from './Components/MobileFooter';
+import NavigationContext from './Context/NavigationContext.js';
 
 function App() {
   const [width, setWidth] = useState(0)
@@ -22,18 +25,28 @@ function App() {
   }, [])
 
   const handleResize = () => {
-    const width = window.innerWidth
-    setWidth(width)
+    setWidth(window.innerWidth)
   }
 
-  // const breakpoint = {change: width > 1000}
+  const [headFoot, setHeadFoot] = useState(true)
 
   return (
-    <>
-      {width > 1000 ? <Nav/> : <MobileNav />}
-      <Main/>
-      {width > 850 ? <Footer/> : <MobileFooter />}
-    </>
+    <NavigationContext.Provider value={{ headFoot, setHeadFoot }}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        {headFoot &&
+          <Nav vw={width} />
+        }
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="reserve-a-table" element={<Reserve />} />
+        </Routes>
+
+        {headFoot &&
+          <Footer vw={width} />
+        }
+      </LocalizationProvider>
+    </NavigationContext.Provider>
   );
 };
 

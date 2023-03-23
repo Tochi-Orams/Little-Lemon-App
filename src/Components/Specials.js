@@ -14,7 +14,7 @@ const specials = [
     {
       title: "Bruschetta",
       description:
-        "Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil. Toppings of tomato, veggies, beans, cured pork, or cheese are examples of variations. In Italy, a brustolina grill is frequently used to create bruschetta.",
+        "Our Bruschetta is made from grilled bread that has been smeared with garlic butter, seasoned with salt and olive oil, and topped with salmon.",
       price: "$8.49",
       class: "mCard",
         getImageSrc: () => require("../Assets/special2.jpg"),
@@ -22,7 +22,7 @@ const specials = [
     {
       title: "Grilled Fish",
       description:
-        "Our grilled fish features halibut fillets marinated in olive oil, lemon juice, basil, and garlic, that are cooked to perfection.",
+        "Our grilled fish features fresh halibut fillets marinated in olive oil, lemon juice, basil, ginger, and garlic, that are cooked to perfection.",
       price: "$17.99",
       class: "mCard",
         getImageSrc: () => require("../Assets/special3.jpg"),
