@@ -37,7 +37,7 @@ const specials = [
                     <h2>Specials</h2>
                 </>
                 <>
-                    <a href="https://youtube.com/">
+                    <a aria-label="Food menu" href="/">
                         <button className="lgButton">View Menu</button>
                     </a>
                 </>

@@ -24,7 +24,7 @@ const MenuCard = ({title, description, price, clas, imageSrc}) => {
                 </>
             </div>
             <p className="cardText">{description}</p>
-            <button className="medButton" onClick={cart}>Add to Cart</button>
+            <button aria-label="Add to cart" className="medButton" onClick={cart}>Add to Cart</button>
           </VStack>
         </Box>
       );

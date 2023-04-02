@@ -140,7 +140,7 @@ const Footer = ({ vw }) => {
                             <img src={logo2} alt="Logo 2" />
                         </Link>
                     </div>
-                    <div className="fList fCol">
+                    <div aria-label="expand" className="fList fCol">
                         <ul>
                             <li className="listTitle">
                                 Navigation
@@ -162,7 +162,7 @@ const Footer = ({ vw }) => {
                             </li>
                         </ul>
                     </div>
-                    <div className="fList fCol">
+                    <div aria-label="expand" className="fList fCol">
                         <ul>
                             <li className="listTitle">
                                 Contact
@@ -178,7 +178,7 @@ const Footer = ({ vw }) => {
                             </li>
                         </ul>
                     </div>
-                    <div className="fList fCol">
+                    <div aria-label="expand" className="fList fCol">
                         <ul>
                             <li className="listTitle">
                                 Socials

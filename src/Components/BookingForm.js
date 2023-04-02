@@ -43,13 +43,18 @@ const BookingForm = ({setDetails, loc}) => {
     const guestRef = useRef()
 
     //  Seating options based on location
-    const localSeating = Object.values(seatingOptions).filter(seat => seat.location.includes(loc))
-    const seatingPreference = localSeating.map((item, idx) => (
-        <option key={idx} value={item.option}>{item.option}</option>
-    ))
+    let localSeating = seatingOptions
+    const changeSeating = (place) => {
+        localSeating = Object.values(seatingOptions).filter(seat => seat.location.includes(loc))
+    }
+
+    useEffect(() => {
+        changeSeating()
+        // eslint-disable-next-line
+    }, [loc])
+
 
     // Time Option Selection
-
     const opSelect = (idx) => {
         const opButtons = [
             document.querySelector(".op1"),
@@ -85,6 +90,7 @@ const BookingForm = ({setDetails, loc}) => {
             fullName: Yup.string().required("Required"),
             email: Yup.string().email("You must enter a valid email address").required("Required"),
             guests: Yup.number().required('Required'),
+            phone: Yup.string().matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, "You must enter a valid phone number")
         })
     })
 
@@ -252,11 +258,12 @@ const BookingForm = ({setDetails, loc}) => {
     // Showing form errors
     const fields = {
         name: document.querySelector(".FN"),
-        email: document.querySelector(".EM")
+        email: document.querySelector(".EM"),
+        phone: document.querySelector(".PN")
     }
 
     const inV = () => {
-        if (fields.name && fields.email) {
+        if (fields.name && fields.email && fields.phone) {
             if (formik.errors.fullName && formik.touched.fullName) {
                 fields.name.classList.add("invalid")
             } else {
@@ -267,10 +274,15 @@ const BookingForm = ({setDetails, loc}) => {
             } else {
                 fields.email.classList.remove("invalid")
             }
+            if (formik.errors.phone && formik.touched.phone) {
+                fields.phone.classList.add("invalid")
+            } else {
+                fields.phone.classList.remove("invalid")
+            }
         }
     }
     useEffect(() => {
-        if (fields.name && fields.email)
+        if (fields.name && fields.email && fields.phone)
         inV()
     // eslint-disable-next-line
     }, [formik.errors])
@@ -279,7 +291,7 @@ const BookingForm = ({setDetails, loc}) => {
         <article className="resFormSection">
             <h2>Reservation Details</h2>
             <form className="resForm" onSubmit={confirm}>
-                <div className="form1">
+                <section className="form1">
                     <div className="formLeft resPreferences">
                         <h3>Preferences</h3>
                         <FormControl>
@@ -288,7 +300,6 @@ const BookingForm = ({setDetails, loc}) => {
                               minDate={formik.values.date}
                               className="picker"
                               id="date"
-                              data-testid="date"
                               name="date"
                               value={formik.values.date}
                               onChange={(newDate) => {setResDate(newDate)}}
@@ -297,12 +308,13 @@ const BookingForm = ({setDetails, loc}) => {
                             <FormErrorMessage>{formik.errors.date}</FormErrorMessage>
                         </FormControl>
                         <FormControl>
-                            <FormLabel className="PL" htmlFor="time">Time*</FormLabel>
+                            <label className="PL" htmlFor="time">Time*</label>
                             <TimePicker
                               minTime={dayjs().set('hour', 8).set('minute', 59)}
                               maxTime={dayjs().set('hour', 21).set('minute', 30)}
                               className="picker"
                               id="time"
+                              data-testid="time"
                               name="time"
                               value={resTime}
                               onChange={(newTime) => {setResTime(newTime)
@@ -343,7 +355,9 @@ const BookingForm = ({setDetails, loc}) => {
                               value={seat[0]}
                               onChange={handleSeating}
                             >
-                                {seatingPreference}
+                                {localSeating.map((item, idx) => (
+                                    <option key={idx} value={item.option}>{item.option}</option>
+                                ))}
                             </Select>
                         </FormControl>
                     </div>
@@ -358,7 +372,7 @@ const BookingForm = ({setDetails, loc}) => {
                             available.length > 0 && validDate ?
                             <div className="availabilityButtons">
                                 {available.map((value) => (
-                                    <button key={value.id} className={value.cls} onClick={(e) => {e.preventDefault()
+                                    <button aria-label={value.time} key={value.id} className={value.cls} onClick={(e) => {e.preventDefault()
                                     timeSet(value.time)
                                     opSelect(value.id)}}>
                                         <h3>{value.time}</h3>
@@ -392,8 +406,8 @@ const BookingForm = ({setDetails, loc}) => {
                             </FormControl>
                         </div>
                     </div>
-                </div>
-                <div className="form2">
+                </section>
+                <section className="form2">
                     <h2>Contact Details</h2>
                     <FormControl
                       isInvalid={formik.errors.fullName && formik.touched.fullName}
@@ -403,6 +417,7 @@ const BookingForm = ({setDetails, loc}) => {
                         <Input
                           className="txtInput lgTxt FN"
                           id="fullName"
+                          data-testid="fullName"
                           name="fullName"
                           value={formik.values.fullName}
                           onChange={formik.handleChange}
@@ -410,7 +425,7 @@ const BookingForm = ({setDetails, loc}) => {
                         />
                         <FormErrorMessage>
                             {inV()}
-                            <span className="errMsg">{formik.errors.fullName}</span>
+                            <span role="alert" className="errMsg">{formik.errors.fullName}</span>
                         </FormErrorMessage>
                     </FormControl>
                     <div className="row2">
@@ -423,6 +438,7 @@ const BookingForm = ({setDetails, loc}) => {
                                 <Input
                                   className="txtInput medTxt EM"
                                   id="email"
+                                  data-testid="email"
                                   name="email"
                                   value={formik.values.email}
                                   onChange={formik.handleChange}
@@ -430,7 +446,7 @@ const BookingForm = ({setDetails, loc}) => {
                                 />
                                 <FormErrorMessage>
                                     {inV()}
-                                    <span className="errMsg">{formik.errors.email}</span>
+                                    <span role="alert" className="errMsg">{formik.errors.email}</span>
                                 </FormErrorMessage>
                             </FormControl>
                         </>
@@ -438,21 +454,26 @@ const BookingForm = ({setDetails, loc}) => {
                             <FormControl
                               isInvalid={formik.errors.phone && formik.touched.phone}
                             >
-                                <FormLabel className="lastTxt PL2" htmlFor="fullName">{"Phone Number (Optional)"}</FormLabel>
+                                <FormLabel className="lastTxt PL2" htmlFor="phone">{"Phone Number (Optional)"}</FormLabel>
                                 <Input
-                                className="txtInput medTxt"
+                                className="txtInput medTxt PN"
                                 id="phone"
+                                data-testid="phone"
                                 name="phone"
                                 value={formik.values.phone}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 />
+                                <FormErrorMessage>
+                                    {inV()}
+                                    <span role="alert" className="errMsg">{formik.errors.phone}</span>
+                                </FormErrorMessage>
                             </FormControl>
                         </>
                     </div>
-                </div>
+                </section>
                 <div className="formEnd">
-                    <button type="submit" className="lgButton2 sb">
+                    <button aria-label="Submit" type="submit" className="lgButton2 sb">
                         Confirm Reservation
                     </button>
                 </div>

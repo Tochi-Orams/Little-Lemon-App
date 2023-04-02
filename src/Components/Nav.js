@@ -124,7 +124,7 @@ const Nav = ({ vw }) => {
                             <a className="mNavlink" href="/">Log in</a>
                         </li>
                     </ul>
-                    <div className="hamburger">
+                    <div aria-label="menu" className="hamburger">
                         <span className="bar"></span>
                         <span className="bar"></span>
                         <span className="bar"></span>

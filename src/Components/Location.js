@@ -1,4 +1,5 @@
-import { useState} from "react";
+import { useState, useEffect, useRef } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const locationData = [
     {
@@ -9,7 +10,8 @@ const locationData = [
         mapFrame: <iframe title="West Loop" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7419.205695117412!2d-87.63912332169406!3d41.52290648936322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e193c28b5aae5%3A0x1e34892c77e311ca!2s501%20S%20Halsted%20St%2C%20Chicago%20Heights%2C%20IL%2060411%2C%20USA!5e0!3m2!1sen!2sca!4v1678595088884!5m2!1sen!2sca"></iframe>,
         details: "Not only is the West Loop venue the original Little Lemon, it is also the largest Little Lemon venue in the world! Our upstairs and outdoor seating sections give plenty of space for large groups and private celebrations!",
         classes: ["locOption loc1", "wl_info"],
-        llLocation: "wl"
+        llLocation: "wl",
+        style: 0
     },
     {
         name: "Gold Coast",
@@ -19,7 +21,8 @@ const locationData = [
         mapFrame: <iframe title="Gold Coast" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.6645596939047!2d-87.63121106785714!3d41.900070605563734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd35227c381b7%3A0x19913f126c3b623f!2s44%20E%20Walton%20St%2C%20Chicago%2C%20IL%2060611%2C%20USA!5e0!3m2!1sen!2sca!4v1678595790481!5m2!1sen!2sca"></iframe>,
         details: "Our Gold Cost venue is definitely our most picturesque venue in Chicago. If you love to eat amazing food while being besmerized by incredible views of the water, you will absolutely love this venue!",
         classes: ["locOption loc2", "gc_info"],
-        llLocation: "gc"
+        llLocation: "gc",
+        style: 1
     },
     {
         name: "Lincoln Park",
@@ -29,26 +32,23 @@ const locationData = [
         mapFrame: <iframe title="Lincoln Park" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.04030837833!2d-87.63523478255615!3d41.9134922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34225afe961%3A0x87dc3b06c7513eba!2s1729%20N%20Clark%20St%2C%20Chicago%2C%20IL%2060614%2C%20USA!5e0!3m2!1sen!2sca!4v1678595856471!5m2!1sen!2sca"></iframe>,
         details: "Located on the north side of Chicago, this Little Lemon venue has a beautiful view of Chicago's historic Lincoln Park. If you love being righ between nature and the city, this is the venue for you!",
         classes: ["locOption loc3", "lp_info"],
-        llLocation: "lp"
+        llLocation: "lp",
+        style: 2
     }
 ]
 
-const bg = (flp, nm) => {
-    if (flp) {
-        return (
-            {background: "#e7e7e7"}
-        )
-    } else {
-        return (
-            {background: `url('${locationData[nm].getImageSrc()}') no-repeat 0% 70%`}
-        )
-    }
+const bg = (nm) => {
+    return (
+        {background: `url('${locationData[nm].getImageSrc()}') no-repeat 0% 70%`}
+)}
+const delay = (idx) => {
+    return {transitionDelay: `${idx} * 200`}
 }
 
 
 const DisplayLocation = ({onFlip, index}) => {
     return (
-        <div className="displayLoc">
+        <div className="locContain">
             <div className="gMap">
                 {locationData[index].mapFrame}
             </div>
@@ -93,18 +93,26 @@ const SelectLocation = ({changeNum, onUnflip}) => {
     return (
         <div className="selectLoc">
             <div className="locOptions">
-                {locationData.map((place, i) => (
-                    <div key={i} onMouseOver={() => reveal(place.number)} className={place.classes[0]}>
-                        <h2>{place.name}</h2>
-                        <button className="medButton" onClick={() => {
-                            changeNum(place.number)
-                            onUnflip()
-                            }}
-                            >
-                            Select
-                        </button>
-                    </div>
-                ))}
+                <TransitionGroup appear>
+                    {locationData.map((place, i) => (
+                        <CSSTransition
+                          key={i}
+                          timeout={{enter: 400 + i * 200}}
+                          classNames="stagger1"
+                        >
+                            <div style={delay(i)} onMouseOver={() => reveal(place.number)} className={place.classes[0]}>
+                                <h2>{place.name}</h2>
+                                <button className="medButton" onClick={() => {
+                                    changeNum(place.number)
+                                    onUnflip()
+                                    }}
+                                    >
+                                    Select
+                                </button>
+                            </div>
+                        </CSSTransition>
+                    ))}
+                </TransitionGroup>
             </div>
             <div className="locDetails">
                 {locationData.map((info, i) => (
@@ -123,28 +131,77 @@ const SelectLocation = ({changeNum, onUnflip}) => {
 const Location = ({setLocation}) => {
     const [flip, setFlip] = useState(false)
     const [num, setNum] = useState(0)
+    const [show, setShow] = useState(false)
+    const bgNum = useRef(0)
+
+    useEffect(() => {
+        if (flip) {
+            const timer = setTimeout(() => {
+                setShow(true);
+            }, 450)
+            return () => clearTimeout(timer)
+        } else {
+            const timer = setTimeout(() => {
+                setShow(false);
+            }, 150)
+            const timer2 = setTimeout(() => {
+                fadeOut();
+            }, 50)
+            return () => {
+                clearTimeout(timer)
+                clearTimeout(timer2)
+            }
+        }
     // eslint-disable-next-line
+    }, [flip])
+
+    const fadein = () => {
+        const lc = document.querySelector(".locContain")
+        const dL = document.querySelector(".displayLoc")
+        lc.classList.add("active")
+        dL.classList.add("active")
+    }
+    const fadeOut = () => {
+        const lc = document.querySelector(".locContain")
+        const dL = document.querySelector(".displayLoc")
+        dL.classList.remove("active")
+        lc.classList.remove("active")
+    }
+
+    useEffect(() => {
+        bgNum.current = num
+    // eslint-disable-next-line
+    }, [flip])
 
     return (
         <article className="locSection">
-            <div className="locCard"
-              style={bg(flip, num)}
-            >
-                {!flip ?
-                    <DisplayLocation
-                      onFlip={() => setFlip(true)}
-                      index={num}
-                    />
-                : <SelectLocation
-                    changeNum={(x) => setNum(x)}
-                    onUnflip={() => {
-                        setFlip(false)
-                        setLocation(locationData[num].llLocation)
-                    }}
-                    flip={flip}
-                  />
-                }
-            </div>
+            <section className="locCard">
+                <div className="locBG"
+                style={bg(num)}
+                >
+                    <div className="bgHide" style={bg(bgNum.current)}>
+                        <div className="displayLoc">
+                            {!show ?
+                            <DisplayLocation
+                                onFlip={() => {
+                                    setFlip(true)
+                                    fadein()
+                                }}
+                                index={num}
+                                />
+                            :
+                            <SelectLocation
+                                changeNum={(x) => setNum(x)}
+                                onUnflip={() => {
+                                    setFlip(false)
+                                    setLocation(locationData[num].llLocation)
+                                }}
+                            />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
         </article>
     )
 }

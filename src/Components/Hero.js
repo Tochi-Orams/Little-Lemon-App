@@ -48,7 +48,7 @@ const Hero = () => {
                         <h2>{article.subtitle}</h2>
                         <h3>{article.content}</h3>
                         <Link to={article.direct}>
-                            <button className="lgButton">{article.button}</button>
+                            <button aria-label={article.button} className="lgButton sldButton">{article.button}</button>
                         </Link>
                     </div>
                 </div>

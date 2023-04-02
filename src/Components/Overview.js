@@ -5,7 +5,7 @@ import LL2 from "../Assets/LL2.jpg";
 const Overview = () => {
     return (
         <article className="overviewSection">
-            <div>
+            <section>
                 <a href="https://youtube.com/">
                     <h2>Little Lemon</h2>
                     <span className="lessBold">Chicago</span>
@@ -19,12 +19,12 @@ const Overview = () => {
                     Lemon will excite your tastebuds in an unprecedented way! Swing by with your friends and
                     family, or order your favorite dishes online today!
                 </p>
-            </div>
-            <div className="overviewPics">
+            </section>
+            <section className="overviewPics">
                 <img className="chicago" src={chicago} alt="Downtown Chicago" />
                 <img className="LL2-2" src={LL2} alt="Little Lemon Restaurant" />
                 <img className="LL2" src={LL2} alt="Little Lemon Restaurant" />
-            </div>
+            </section>
         </article>
     )
 };

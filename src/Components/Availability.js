@@ -14,7 +14,7 @@ const Availablity = () => {
         // Variable to determine if the time input is too close to closing time
         const closing = hour > 9 && timeInput.includes("PM")
         const opening = hour === 9 && timeInput.includes("AM")
-        const closed = [hour < 9 && timeInput.includes("AM"), hour >= 10 && timeInput.includes("PM")]
+        const closed = [hour < 9 && timeInput.includes("AM"), hour !== 12 && hour >= 10 && timeInput.includes("PM")]
 
         // Initialize array for storing timeslot values
         const decs = []

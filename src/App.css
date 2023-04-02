@@ -133,6 +133,10 @@ a:active {text-decoration: none; color: black}
 .slider {
   height: 60vh !important;
 }
+.slide.hidden {
+	visibility: hidden;
+  z-index: -500;
+}
 @media(max-width: 1250px) {
   .two[style] {
     background-position: 45% 70% !important;
@@ -687,7 +691,14 @@ article {
 .locCard {
   border-radius: 25px;
   height: 400px;
+}
+.locBG {
+  border-radius: 25px;
   background-size: cover !important;
+}
+.bgHide {
+  background-size: cover !important;
+  border-radius: 25px;
 }
 .locInfo {
   color: #ffffff;
@@ -697,12 +708,35 @@ article {
   padding-bottom: 2rem;
 }
 .displayLoc {
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-radius: 25px;
+  backdrop-filter: blur(0) opacity(0);
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s linear;
+}
+.displayLoc.active {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px) opacity(1);
+  animation: blury 2s ease forwards;
+  -webkit-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
+.locContain {
   display: flex;
+  opacity: 1;
   justify-content: space-between;
   padding: 25px;
-  border-radius: 25px;
-  background: rgba(0, 0, 0, 0.5);
   height: 400px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.locContain.active {
+  overflow: hidden;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  transform: scale(1.2);
 }
 iframe {
   width: 700px;
@@ -724,8 +758,20 @@ iframe {
   margin: auto auto auto 0;
   padding-right: 4rem;
   border-right: solid 1px #c2c2c2;
+  color: #FFFFFF;
+}
+.stagger1-enter, .stagger1-appear {
+  transform: translateY(30%);
+  opacity: 0;
+}
+.stagger1-enter-active, .stagger1-appear-active {
+  transform: translateY(0);
+  opacity: 1;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .locDetails {
+  color: #FFFFFF;
   padding-left: 2rem;
   margin: auto;
 }
@@ -782,13 +828,14 @@ iframe {
   padding-bottom: 2rem;
 }
 .PL {
+  display: block;
   padding: 2rem 0 0.5rem 0;
 }
 .PL2 {
   padding-bottom: 0.5rem;
 }
 .form2 {
-  padding: 0 8vw 0 8vw;
+  padding: 0 8vw 2rem 8vw;
   border-top: 1px solid #e7e7e7;
   margin-top: 2rem;
 }
@@ -816,10 +863,11 @@ iframe {
   width: 27vw;
 }
 .formEnd {
-  padding: 3rem 0 6rem 0;
+  border-top: 1px solid #e7e7e7;
+  padding: 4rem 0 4rem 0;
   text-align: center;
 }
-.formEnd::before {
+/* .formEnd::before {
   background-color: #496e57;
   position: absolute;
   content: "";
@@ -828,7 +876,7 @@ iframe {
   width: 100vw;
   left: 0;
   bottom: 226px;
-}
+} */
 /* .picker {
   background-color: #e7e7e7;
   border-radius: 20px;
@@ -836,6 +884,7 @@ iframe {
 } */
 .MuiInputBase-root {
   background-color: #e7e7e7;
+  width: max(12.5rem, 14vw);
   border-radius: 20px;
   font-size: 1rem;
 }
@@ -848,12 +897,16 @@ iframe {
   font-size: 1rem;
 }
 .dropdown {
-  width: 27vw;
+  width: max(12.5rem, 23vw);
   background-color: #e7e7e7;
   height: 60px;
   padding: 0 1rem 0 1rem;
-  border-radius: 20px;
+  border: 0.12rem solid #c1c1c1;
+  border-radius: 5px;
   font-size: 1rem;
+}
+.dropdown:hover {
+  border-color: #000000;
 }
 .guestButton {
   height: 60px;
@@ -871,10 +924,10 @@ iframe {
   transition: all 0.2s ease;
 }
 .guestLess {
-  border-radius: 20px 0 0 20px;
+  border-radius: 5px 0 0 5px;
 }
 .guestMore {
-  border-radius: 0 20px 20px 0;
+  border-radius: 0 5px 5px 0;
 }
 .availabilityButtons {
   height: 155px;
@@ -924,7 +977,7 @@ iframe {
   color: rgb(200, 0, 0);
   font-size: small;
 }
-.FN.invalid, .EM.invalid {
+.FN.invalid, .EM.invalid, .PN.invalid {
   /* border-bottom: solid 1px red; */
   box-shadow: 0 0 3px rgb(200, 0, 0);
 }
@@ -951,6 +1004,7 @@ iframe {
     border-top: 1px solid #e7e7e7;
     margin-top: 3rem;
     width: auto;
+    margin-left: 0;
   }
   .formLeft {
     width: auto;
