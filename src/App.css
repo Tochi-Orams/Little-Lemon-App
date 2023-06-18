@@ -332,7 +332,7 @@ a:active {text-decoration: none; color: black}
 .mMenu.active {
   padding: 6rem 8vw 0;
   opacity: 1;
-  width: 35%;
+  width: 55%;
   transition: all 0.8s ease;
 }
 .overlay.active {
@@ -577,8 +577,9 @@ article {
 /* Overview Section Styling */
 .overviewSection {
   display: flex;
-  padding: 3rem 25vw 3rem 25vw;
+  padding: 3rem 25vw;
   justify-content: space-around;
+  transition: all 0.3s ease;
 }
 .overviewSection p {
   padding: 2rem 3rem 2rem 0;
@@ -646,6 +647,7 @@ article {
 @media(max-width: 1250px) {
   .overviewSection {
     flex-direction: column;
+    padding: 3rem 15vw;
   }
   .overviewSection p {
     padding: 2rem 0 2rem 0;
@@ -747,9 +749,10 @@ iframe {
 }
 .selectLoc {
   display: flex;
-  padding: 1rem 5vw 1rem 5vw;
+  width: fit-content;
+  justify-content: space-between;
+  padding: 1rem 5vw;
   height: 400px;
-  margin: auto;
 }
 .locOption {
   margin-bottom: 2rem;
@@ -795,6 +798,9 @@ iframe {
   }
 }
 @media(max-width: 1000px) {
+  .selectLoc {
+    margin: auto;
+  }
   .gMap {
     display: none;
   }
@@ -805,6 +811,11 @@ iframe {
     padding: 0;
     border-right: 0px;
     margin: auto;
+  }
+}
+@media(max-width: 700px) {
+  .selectLoc {
+    padding: 1rem 0;
   }
 }
 
@@ -1036,8 +1047,8 @@ iframe {
   background-color: #496e57;
   color: #FFFFFF;
   text-align: center;
-  height: 100vh;
-  overflow-y: hidden;
+  height: fit-content;
+  /* overflow-y: hidden; */
 }
 .Confirmation h1 {
   padding: 3rem 0 2rem 0;
@@ -1053,8 +1064,8 @@ iframe {
   max-width: 500px;
   padding: 2rem 0 5rem 0;
 }
-#confEnd {
-  padding-bottom: 8rem;
+.Confirmation .lgButton {
+  margin-bottom: 100px;
 }
 @media(max-width: 800px) {
   #checkmark {

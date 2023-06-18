@@ -10,7 +10,7 @@ const ResConfirmation = ({ details, setPage }) => {
     const {headFoot, setHeadFoot} = useContext(NavigationContext)
 
     return (
-        <>
+        <div>
             {details !== null ?
             <article className="Confirmation">
                 <nav className="confNav">
@@ -19,7 +19,7 @@ const ResConfirmation = ({ details, setPage }) => {
                     </Link>
                     <Link to="/not-available" className="confLink" onClick={() => {setHeadFoot(true)
                     setPage("Login")}}>
-                        <FontAwesomeIcon id="user" icon={faUser} size="2x" color="#F4CE14"/>
+                        <FontAwesomeIcon id="user2" icon={faUser} size="2x" color="#F4CE14"/>
                     </Link>
                 </nav>
                 <div className="Check">
@@ -28,7 +28,7 @@ const ResConfirmation = ({ details, setPage }) => {
                 <h1>Thanks {details.fullName.slice(0, details.fullName.indexOf(" "))}, your reservation is confirmed!</h1>
                 <h3>A confirmation email has been sent to {details.email}</h3>
                 <h3 id="lastLine">Please contact us ahead of time if you would like to make any adjustments or cancel your reservation</h3>
-                <Link to="/" id="confEnd">
+                <Link to="/">
                     <button className="lgButton" onClick={() => setHeadFoot(true)}>Back to Home</button>
                 </Link>
             </article>
@@ -37,7 +37,7 @@ const ResConfirmation = ({ details, setPage }) => {
                 <h2>Oops! Something went wrong.</h2>
                 <h3>Please try again</h3>
             </article>}
-        </>
+        </div>
     )
 }
 

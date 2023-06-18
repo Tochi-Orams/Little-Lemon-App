@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
@@ -110,26 +109,6 @@ const Footer = ({ vw }) => {
         }
     }
 
-    useEffect(() => {
-        if (dropdowns.nv) {
-            dropdowns.nv.addEventListener('click', () => expand(1))
-            return () => dropdowns.nv.removeEventListener('click', () => expand(1))
-        }
-    })
-    useEffect(() => {
-        if (dropdowns.ct) {
-            dropdowns.ct.addEventListener('click', () => expand(2))
-            return () => dropdowns.ct.removeEventListener('click', () => expand(2))
-        }
-    })
-    useEffect(() => {
-        if (dropdowns.sc) {
-            dropdowns.sc.addEventListener('click', () => expand(3))
-            return () => dropdowns.sc.removeEventListener('click', () => expand(3))
-        }
-    })
-
-
     return (
         <>
             {vw > 850 ?
@@ -214,12 +193,14 @@ const Footer = ({ vw }) => {
                     </div>
                     <div className="footerRight">
                         {allLinks.map((item, i) => (
-                            <ExpandButton
-                              name={item.name}
-                              cls={item.cls}
-                              key={i}
-                              contents={item.contents()}
-                            />
+                            <div onClick={() => expand(i + 1)}>
+                                <ExpandButton
+                                  name={item.name}
+                                  cls={item.cls}
+                                  key={i}
+                                  contents={item.contents()}
+                                />
+                            </div>
                         ))}
                     </div>
                 </footer>
