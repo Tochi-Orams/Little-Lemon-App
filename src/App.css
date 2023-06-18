@@ -440,12 +440,12 @@ footer {
   list-style: none;
 }
 #fakeLink {
-  width: 80vw;
+  width: min(80vw, 600px);
   height: fit-content;
   text-align: center;
   position: fixed;
   top: 45%;
-  right: calc(50% - 40vw);
+  right: calc(50% - min(40vw, 300px));
   background-color: #496e57;
   color: white;
   overflow: hidden;
@@ -453,7 +453,7 @@ footer {
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s ease;
-  z-index: 15;
+  z-index: 150;
 }
 #fakeLink h3 {
   margin-top: 2rem;
@@ -489,11 +489,11 @@ footer {
 .overlay2 {
   position: fixed;
   width: 105%;
-  height: 105vh;
-  top: -1%;
+  height: 105%;
+  top: 0;
   left: -1%;
   background-color: black;
-  z-index: 3;
+  z-index: 100;
   opacity: 0;
   transition: 0.3s ease-in;
   pointer-events: none;
@@ -1146,7 +1146,7 @@ iframe {
 #NA {
   text-align: center;
   height: 100%;
-  margin: 0 7.5vw;
+  margin: 0 7.5vw 5rem;
 }
 #NA em {
   color: #496e57;

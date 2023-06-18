@@ -25,19 +25,18 @@ const Footer = ({ vw, setPage }) => {
 
     const fake = () => {
         setModal(true)
-        setTimeout(() => {
-            setModal(false)
-        }, 5000);
     }
 
     useEffect(() => {
+        const tmt = setTimeout(() => {setModal(false)}, 5000);
         if (modal) {
             document.getElementById("fakeLink").classList.add("active")
-            document.querySelector(".overlay").classList.add("active")
+            document.querySelector(".overlay2").classList.add("active")
         } else {
             document.getElementById("fakeLink").classList.remove("active")
-            document.querySelector(".overlay").classList.remove("active")
+            document.querySelector(".overlay2").classList.remove("active")
         }
+        return () => clearTimeout(tmt)
     }, [modal])
 
     const allLinks = [
@@ -212,7 +211,7 @@ const Footer = ({ vw, setPage }) => {
                     </div>
                     <div className="footerRight">
                         {allLinks.map((item, i) => (
-                            <div onClick={() => expand(i + 1)}>
+                            <div key={i} onClick={() => expand(i + 1)}>
                                 <ExpandButton
                                   name={item.name}
                                   cls={item.cls}
@@ -223,14 +222,14 @@ const Footer = ({ vw, setPage }) => {
                         ))}
                     </div>
                 </footer>
-                <div id="fakeLink">
-                    <div id="timer"></div>
-                    <span onClick={() => setModal(false)}><FontAwesomeIcon icon={faX}/></span>
-                    <h3>Not a real link</h3>
-                    <p>This link isn't real... It's more just for decoration</p>
-                </div>
-                <div className="overlay2"></div>
             </>}
+            <div id="fakeLink">
+                <div id="timer"></div>
+                <span onClick={() => setModal(false)}><FontAwesomeIcon icon={faX}/></span>
+                <h3>Not a real link</h3>
+                <p>This link isn't real... It's more just for decoration</p>
+            </div>
+            <div className="overlay2" onClick={() => setModal(false)}></div>
         </>
     )
 };
