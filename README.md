@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# Little Lemon Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+
+## Packages used:
+- [React Router](https://github.com/remix-run/react-router)
+- [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
+- [Material UI](https://github.com/mui/material-ui)
+- [Font Awesome](https://github.com/FortAwesome/Font-Awesome)
+- [React Animated Slider](https://github.com/erichbehrens/react-animated-slider)
+- [Formik](https://github.com/jaredpalmer/formik)
+- [Yup](https://github.com/jquense/yup)
+- [Day.JS](https://github.com/iamkun/dayjs)
 
 ## Available Scripts
 
