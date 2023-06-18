@@ -4,17 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../Assets/Logo.svg"
 
-const Nav = ({ vw }) => {
+const Nav = ({ vw, setPage }) => {
     const [prevScroll, setPrevScroll] = useState(0)
+    const [open, setOpen] = useState(false)
     const navRef = useRef(null);
 
     const handleScroll = () => {
-      if (window.scrollY > prevScroll && window.scrollY > 100) {
-        navRef.current.style.transform="translateY(-200px)"
-      } else {
-        navRef.current.style.transform="translateY(0px)"
+      if (!open) {
+        if (window.scrollY > prevScroll && window.scrollY > 100) {
+            navRef.current.style.transform="translateY(-200px)"
+          } else {
+            navRef.current.style.transform="translateY(0px)"
+          }
+          setPrevScroll(window.scrollY)
       }
-      setPrevScroll(window.scrollY)
     }
 
     useEffect(() => {
@@ -35,14 +38,16 @@ const Nav = ({ vw }) => {
     }
 
     const activate = () => {
-        elements.hamburger.classList.toggle("active");
-        elements.menu.classList.toggle("active");
-        elements.overlay.classList.toggle("active");
+        elements.hamburger.classList.toggle("active")
+        elements.menu.classList.toggle("active")
+        elements.overlay.classList.toggle("active")
+        setOpen(true)
     }
     const deactivate = () => {
-        elements.hamburger.classList.remove("active");
-        elements.menu.classList.remove("active");
-        elements.overlay.classList.remove("active");
+        elements.hamburger.classList.remove("active")
+        elements.menu.classList.remove("active")
+        elements.overlay.classList.remove("active")
+        setOpen(false)
     }
 
     useEffect(() => {
@@ -76,22 +81,22 @@ const Nav = ({ vw }) => {
                     </div>
                     <ul className="menu">
                         <li className="navitem">
-                            <a className="navlink" href="/">About</a>
+                            <Link to="not-available" className="navlink" onClick={() => setPage("About")}>About</Link>
                         </li>
                         <li className="navitem">
-                            <a className="navlink" href="/">Menu</a>
+                            <Link to="not-available" className="navlink" onClick={() => setPage("Menu")}>Menu</Link>
                         </li>
                         <li className="navitem">
                             <Link to="reserve-a-table" className="navlink">Reservations</Link>
                         </li>
                         <li className="navitem">
-                            <a className="navlink" href="/">Order Online</a>
+                            <Link to="not-available" className="navlink" onClick={() => setPage("Orders")}>Order Online</Link>
                         </li>
                         <li className="navitem login">
-                            <a className="navlink" href="/">
+                            <Link to="not-available" className="navlink" onClick={() => setPage("Login")}>
                                 <FontAwesomeIcon id="user" icon={faUser} size="1x" color="#b9b9b9"/>
                                 Log in
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </nav>
@@ -109,19 +114,19 @@ const Nav = ({ vw }) => {
                             <Link to="/" className="mNavlink">Home</Link>
                         </li>
                         <li className="mNavitem">
-                            <a className="mNavlink" href="/">About</a>
+                            <Link to="not-available" className="mNavlink" onClick={() => setPage("About")}>About</Link>
                         </li>
                         <li className="mNavitem">
-                            <a className="mNavlink" href="/">Menu</a>
+                            <Link to="not-available" className="mNavlink" onClick={() => setPage("Menu")}>Menu</Link>
                         </li>
                         <li className="mNavitem">
                             <Link to="reserve-a-table" className="mNavlink">Reservations</Link>
                         </li>
                         <li className="mNavitem">
-                            <a className="mNavlink" href="/">Order Online</a>
+                            <Link to="not-available" className="mNavlink" onClick={() => setPage("Orders")}>Order Online</Link>
                         </li>
                         <li className="mNavitem mLogin">
-                            <a className="mNavlink" href="/">Log in</a>
+                            <Link to="not-available" className="mNavlink" onClick={() => setPage("Login")}>Login</Link>
                         </li>
                     </ul>
                     <div aria-label="menu" className="hamburger">

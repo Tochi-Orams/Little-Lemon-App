@@ -3,11 +3,11 @@ import Specials from "./Specials.js";
 import Testimonials from "./Testimonials.js";
 import Overview from "./Overview.js"
 
-const Home = () => {
+const Home = ({setPage}) => {
     return (
         <main>
-            <Hero />
-            <Specials />
+            <Hero setPage={setPage} />
+            <Specials setPage={setPage} />
             <Testimonials />
             <Overview />
         </main>

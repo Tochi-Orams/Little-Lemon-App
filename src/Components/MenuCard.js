@@ -1,11 +1,8 @@
 import React from "react";
 import { Box, VStack } from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
 
-function cart() {
-    console.log("item added to cart")
-}
-
-const MenuCard = ({title, description, price, clas, imageSrc}) => {
+const MenuCard = ({title, description, price, clas, imageSrc, setPage}) => {
     return (
         <Box
           bg="white"
@@ -24,7 +21,9 @@ const MenuCard = ({title, description, price, clas, imageSrc}) => {
                 </>
             </div>
             <p className="cardText">{description}</p>
-            <button aria-label="Add to cart" className="medButton" onClick={cart}>Add to Cart</button>
+            <Link to="not-available" onClick={() => setPage("Cart")}>
+              <button aria-label="Add to cart" className="medButton">Add to Cart</button>
+            </Link>
           </VStack>
         </Box>
       );

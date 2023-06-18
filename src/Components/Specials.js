@@ -1,6 +1,7 @@
 import React from "react";
 import MenuCard from "./MenuCard";
 import { Box } from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
 
 const specials = [
     {
@@ -29,7 +30,7 @@ const specials = [
     }
   ];
 
-  const ProjectsSection = () => {
+  const ProjectsSection = ({setPage}) => {
     return (
         <article className="specialsSection">
             <div className="specialsHeading">
@@ -37,9 +38,9 @@ const specials = [
                     <h2>Specials</h2>
                 </>
                 <>
-                    <a aria-label="Food menu" href="/">
+                    <Link to="not-available" aria-label="Food menu" onClick={() => setPage("Menu")}>
                         <button className="lgButton">View Menu</button>
-                    </a>
+                    </Link>
                 </>
             </div>
             <Box
@@ -56,6 +57,7 @@ const specials = [
                 price={item.price}
                 description={item.description}
                 imageSrc={item.getImageSrc()}
+                setPage={setPage}
                 />
             ))}
             </Box>

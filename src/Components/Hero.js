@@ -11,7 +11,8 @@ const content = [
         image: () => require("../Assets/slide1.jpg"),
         class: "slide slide_1",
         wrapper_class: "one",
-        direct: "/"
+        direct: "not-available",
+        click: "About"
     },
     {
         title: "Happy and Healthy at Home!",
@@ -21,7 +22,8 @@ const content = [
         image: () => require("../Assets/slide2.jpg"),
         class: "slide slide_2",
         wrapper_class: "two",
-        direct: "/"
+        direct: "not-available",
+        click: "Orders"
     },
     {
         title: "Skip the Queue",
@@ -31,11 +33,12 @@ const content = [
         image: () => require("../Assets/slide3.jpg"),
         class: "slide slide_3",
         wrapper_class: "three",
-        direct: "reserve-a-table"
+        direct: "reserve-a-table",
+        click: "home"
     }
 ]
 
-const Hero = () => {
+const Hero = ({setPage}) => {
     return (
         <Slider autoplay={5000} duration={2000}>
             {content.map((article, index) => (
@@ -47,7 +50,7 @@ const Hero = () => {
                         <h1>{article.title}</h1>
                         <h2>{article.subtitle}</h2>
                         <h3>{article.content}</h3>
-                        <Link to={article.direct}>
+                        <Link to={article.direct} onClick={() => setPage(`${article.click}`)}>
                             <button aria-label={article.button} className="lgButton sldButton">{article.button}</button>
                         </Link>
                     </div>

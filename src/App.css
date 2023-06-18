@@ -191,6 +191,7 @@ a:active {text-decoration: none; color: black}
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0 4px gray;
   height: 5rem;
+  width: 100%;
   position: sticky;
   z-index: 5;
   top: 0px;
@@ -294,15 +295,16 @@ a:active {text-decoration: none; color: black}
 .mMenu {
   position: fixed;
   top: 0%;
-  right: -100%;
+  right: 0%;
+  opacity: 0;
   flex-direction: column;
   background-color: #496e57;
-  width: 35%;
+  width: 0px;
   height: 100vh;
-  padding: 6rem 8vw 0 8vw;
-  overflow: hidden !important;
+  padding-top: 6rem;
+  overflow: hidden;
   z-index: 2;
-  transition: 0.3s ease-in;
+  transition: all 0.5s ease;
   border-radius: 25px 0 0 0;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
 }
@@ -328,18 +330,19 @@ a:active {text-decoration: none; color: black}
   padding-top: 3rem;
 }
 .mMenu.active {
-  right: 0;
-  transition: all 0.3s ease-out;
-  transition-delay: 0.2s;
+  padding: 6rem 8vw 0;
+  opacity: 1;
+  width: 35%;
+  transition: all 0.8s ease;
 }
 .overlay.active {
   visibility: visible;
   opacity: 0.7;
-  transition: all 0.5 ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 @media(max-width: 700px) {
   .mMenu {
-    width: 60%;
+    width: 0%;
   }
 }
 @media(max-width: 400px) {
@@ -718,7 +721,6 @@ article {
 .displayLoc.active {
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px) opacity(1);
-  animation: blury 2s ease forwards;
   -webkit-transition: all 0.5s linear;
   transition: all 0.5s linear;
 }
@@ -1061,5 +1063,39 @@ iframe {
   }
   .Confirmation h1 {
     font-size: 2rem;
+  }
+}
+
+/* Not Available Page Styling _________________________ */
+#NA {
+  text-align: center;
+  height: 100%;
+  margin: 0 7.5vw;
+}
+#NA em {
+  color: #496e57;
+}
+#NA p {
+  margin: 3rem auto;
+}
+#NA h1 {
+  margin: 8rem auto 1rem;
+}
+#NA div {
+  display: flex;
+  justify-content: space-around;
+  width: 700px;
+  margin: auto;
+}
+@media(max-width: 850px) {
+  #NA div {
+    flex-direction: column;
+    width: auto;
+  }
+  #NA p {
+    margin-bottom: 1.5rem;
+  }
+  #NA .lgButton {
+    margin: 1rem auto;
   }
 }

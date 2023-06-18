@@ -21,7 +21,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^10.0.1",
     "react": "^18.2.0",
-    "react-animated-slider": "^1.1.4",
+    "react-animated-slider": "^2.0.0",
     "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",

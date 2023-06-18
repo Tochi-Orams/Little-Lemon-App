@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 
-const ResConfirmation = ({ details }) => {
+const ResConfirmation = ({ details, setPage }) => {
     // eslint-disable-next-line
     const {headFoot, setHeadFoot} = useContext(NavigationContext)
 
@@ -17,7 +17,8 @@ const ResConfirmation = ({ details }) => {
                     <Link to="/" className="confLink" onClick={() => setHeadFoot(true)}>
                         <FontAwesomeIcon id="home" icon={faHome} size="2x" color="#F4CE14"/>
                     </Link>
-                    <Link to="/" className="confLink" onClick={() => setHeadFoot(true)}>
+                    <Link to="/not-available" className="confLink" onClick={() => {setHeadFoot(true)
+                    setPage("Login")}}>
                         <FontAwesomeIcon id="user" icon={faUser} size="2x" color="#F4CE14"/>
                     </Link>
                 </nav>

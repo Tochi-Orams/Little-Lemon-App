@@ -11,7 +11,7 @@ const banner = {
     CN: "banner resBanner"
 }
 
-const Reserve = () => {
+const Reserve = ({setPage}) => {
     const [llLocation, setLLLocation] = useState('wl')
     const [resDetails, setResDetails] = useState(null)
 
@@ -29,7 +29,7 @@ const Reserve = () => {
                 <BookingForm setDetails={setResDetails} loc={llLocation}/>
             </>
             :
-            <ResConfirmation details={resDetails}/>
+            <ResConfirmation details={resDetails} setPage={setPage} />
             }
         </main>
     )
